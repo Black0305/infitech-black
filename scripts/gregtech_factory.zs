@@ -13,9 +13,6 @@ materialCompressedWroughtIron.addFlags(["GENERATE_PLATE", "GENERATE_ROD", "GENER
 val materialCompressedIron = MaterialRegistry.createIngotMaterial(698, "compressed_iron", 0xC8D4D4, "dull", 2, [<material:iron> * 1], 6.5, 7.0, 435);
 materialCompressedIron.addFlags(["GENERATE_PLATE", "GENERATE_ROD", "GENERATE_BOLT_SCREW"]);
 
-//val materialEnderium = MaterialRegistry.createIngotMaterial(697, "enderium", 0x2E574F, "shiny", 3, null, 8.0, 7.0, 256, 3000);
-//materialEnderium.addFlags(["GENERATE_BOLT_SCREW", "GENERATE_GEAR"]);
-
 val materialSignalum = MaterialRegistry.createIngotMaterial(696, "signalum", 0xFFAA33, "shiny", 2, null, 5.0, 9.0, 128, 1000);
 materialSignalum.addFlags(["GENERATE_BOLT_SCREW", "GENERATE_GEAR"]);
 
@@ -29,13 +26,6 @@ materialCobaltAluminate.addFlags(["DISABLE_DECOMPOSITION"]);
 val materialThaumium = MaterialRegistry.createIngotMaterial(693, "thaumium", 0x7A007A, "shiny", 3, null, 10.0, 8.0, 315);
 materialThaumium.addFlags(["GENERATE_PLATE", "GENERATE_ROD", "GENERATE_BOLT_SCREW"]);
 
-//val materialCobaltOxide = MaterialRegistry.createDustMaterial(692, "cobalt_oxide", 3556352, "dull", 0, [<material:cobalt> * 1, <material:oxygen> * 1]);
-//materialCobaltOxide.addFlags(["DISABLE_DECOMPOSITION"]);
-
-//val materialArsenicTrioxide = MaterialRegistry.createDustMaterial(691, "arsenic_trioxide", 15856113, "dull", 0, [<material:arsenic> * 2, <material:oxygen> * 3]);
-//materialArsenicTrioxide.addFlags(["DISABLE_DECOMPOSITION"]);
-
-//val materialThoriumDioxide = MaterialRegistry.createDustMaterial(690, "thorium_dioxide", 0x141414, "shiny", 0, [<material:thorium> * 1, <material:oxygen> * 2]);
 val materialThoriumHydroxide = MaterialRegistry.createDustMaterial(689, "thorium_hydroxide", 0x313131, "shiny", 0, [<material:thorium> * 1, <material:oxygen> * 4, <material:hydrogen> * 4]);
 val materialCrudeThoriumPrecipitate = MaterialRegistry.createDustMaterial(688, "crude_thorium_precipitate", 0x242424, "shiny", 0, [<material:thorium> * 1, <material:oxygen> * 4, <material:chlorine> * 1]);
 
@@ -43,16 +33,13 @@ val materialTritanite = MaterialRegistry.createDustMaterial(687, "tritanite", 0x
 materialTritanite.addFlags(["DISABLE_DECOMPOSITION", "GENERATE_ORE"]);
 
 #Raw Uranium, as opposed to U238 Ore
-val materialUranium = MaterialRegistry.createDustMaterial(821, "raw_uranium", 0x39F060, "dull", 0, null);
+val materialUranium = MaterialRegistry.createDustMaterial(686, "raw_uranium", 0x39F060, "dull", 0, null);
 materialUranium.addFlags(["DISABLE_DECOMPOSITION"]);
 materialUranium.addFlags(["GENERATE_ORE"]);
 
 
 
 //Fluid		createFluidMaterial(int metaItemSubId, String name, int color, String iconSet, @Optional MaterialStack[] materialComponents)
-//val fluidUraniumHexafluoride = MaterialRegistry.createFluidMaterial(686, "uranium_hexafluoride", 0x20b23b, "fluid");
-//val fluidEnderiumBase = MaterialRegistry.createFluidMaterial(685, "enderium_base", 0x4D756E , "fluid" );
-
 
 //dyes_water
 val fluidWaterDyeBlack = MaterialRegistry.createFluidMaterial(649, "water_dye_black", 0x202020, "fluid", null);
