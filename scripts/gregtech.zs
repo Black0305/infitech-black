@@ -122,7 +122,7 @@ var coal_ball = <contenttweaker:coal_ball>;
 var coal_dust = <ore:dustCoal>;
 var flint = <minecraft:flint>;
 
-compressor.findRecipe(2, [<minecraft:redstone>], null).remove(); // Removed by Gregic Additions already I think
+//compressor.findRecipe(2, [<minecraft:redstone>], null).remove(); // Removed by Gregicality
 
 recipes.addShaped("it3_gt_coal_ball", coal_ball, [
   [coal_dust, coal_dust, coal_dust],
@@ -209,7 +209,7 @@ chemical_reactor.recipeBuilder()
 	.buildAndRegister();
 
 
-chemical_reactor.recipeBuilder()		//Molten Enderium Base
+/* chemical_reactor.recipeBuilder()		//Molten Enderium Base
 	.inputs(<ore:dustSilver> * 1, <ore:dustPlatinum> * 1)
 	.fluidInputs(<liquid:tin> * 288)
 	.fluidOutputs(<liquid:enderium_base> * 576)
@@ -224,6 +224,7 @@ chemical_reactor.recipeBuilder()		//Enderium Dust
 	.duration(200)
 	.EUt(30)
 	.buildAndRegister();
+*/
 	
 chemical_reactor.recipeBuilder()		//Signalum Dust
 	.inputs(<ore:dustSilver> * 1)
@@ -254,7 +255,7 @@ oreFuelSparseUranium.addAll(<ore:dustPitchblende>);
 chemical_reactor.recipeBuilder()
 	.inputs(oreFuelRichUranium * 1)
 	.fluidInputs([<liquid:hydrofluoric_acid> * 1000, <liquid:water> * 1000])
-	.fluidOutputs([<liquid:uranium_hexafluoride> * 7000, <liquid:radon> * 1])
+	.fluidOutputs([<liquid:hexafluoride.uranium_radioactive> * 7000, <liquid:radon> * 1])
 	.duration(400)
 	.EUt(580)
 	.buildAndRegister();
@@ -263,7 +264,7 @@ chemical_reactor.recipeBuilder()
 chemical_reactor.recipeBuilder()
 	.inputs(oreFuelMediumUranium * 1)
 	.fluidInputs([<liquid:hydrofluoric_acid> * 1000, <liquid:water> * 1000])
-	.fluidOutputs(<liquid:uranium_hexafluoride> * 4000)
+	.fluidOutputs(<liquid:hexafluoride.uranium_radioactive> * 4000)
 	.duration(400)
 	.EUt(580)
 	.buildAndRegister();
@@ -272,7 +273,7 @@ chemical_reactor.recipeBuilder()
 chemical_reactor.recipeBuilder()
 	.inputs(oreFuelSparseUranium * 1)
 	.fluidInputs([<liquid:hydrofluoric_acid> * 1000, <liquid:water> * 1000])
-	.fluidOutputs(<liquid:uranium_hexafluoride> * 2000)
+	.fluidOutputs(<liquid:hexafluoride.uranium_radioactive> * 2000)
 	.duration(400)
 	.EUt(580)
 	.buildAndRegister();
@@ -288,7 +289,7 @@ val uranium238Oxidized = <nuclearcraft:uranium:9>;
 val uranium235Oxidized = <nuclearcraft:uranium:5>;
 
 centrifuge.recipeBuilder()
-	.fluidInputs([<liquid:uranium_hexafluoride> * 220])
+	.fluidInputs([<liquid:hexafluoride.uranium_radioactive> * 220])
   .chancedOutput(tinyUranium235 * 2, 500, 100)
   .chancedOutput(uranium238 * 1, 1150, 200)
   .duration(85)
@@ -300,7 +301,7 @@ centrifuge.recipeBuilder()
 recipes.addShapeless("it3_gt_uranium235", uranium235, [tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235, tinyUranium235]);
 
 // Disable default Uranium238 -> TinyPlutonium + TinyUranium235
-centrifuge.findRecipe(320, [<ore:dustUranium>.firstItem * 1], null).remove();
+//centrifuge.findRecipe(320, [<ore:dustUranium>.firstItem * 1], null).remove(); //Removed by Gregicality
 
 alloy_smelter.recipeBuilder()		//Blue Alloy
 	.inputs(<ore:dustSilver> * 1, <ore:dustCobaltAluminate> * 1)
@@ -375,7 +376,7 @@ var tinyPlatinum = <ore:dustTinyPlatinum>.firstItem;
 var smallTungstate = <ore:dustSmallTungstate>.firstItem;
 var sand = <minecraft:sand>;
 
-centrifuge.findRecipe(20,[<ore:dustEndstone>.firstItem *1], null).remove();
+//centrifuge.findRecipe(20,[<ore:dustEndstone>.firstItem *1], null).remove();	//Removed by Gregicality
 
 centrifuge.recipeBuilder().inputs(<ore:dustEndstone> *1)
   .chancedOutput(tinyPlatinum * 1 , 625, 100)
@@ -383,15 +384,7 @@ centrifuge.recipeBuilder().inputs(<ore:dustEndstone> *1)
   .chancedOutput(sand * 1 , 9000, 100)
   .duration(320).EUt(20).buildAndRegister();	
   
-// Centrifuge: Remove Air -> Noble gases since it was an easy way to get Helium.  Let's remove Argon too while we're at it.
-centrifuge.findRecipe(5, null, [<liquid:liquid_air> * 53000]).remove();
-centrifuge.recipeBuilder()
-	.fluidInputs(<liquid:liquid_air> * 51000)
-	.fluidOutputs([<liquid:nitrogen> * 32000, <liquid:nitrogen> * 8000, <liquid:oxygen> * 11000])
-	.duration(1500)
-	.EUt(5)
-	.buildAndRegister();	
-
+  
 // Add oredicts to facilitate some questing
 var oreIronQuestOres = <ore:ironQuestOres>;  
 var oreCopperQuestOres = <ore:copperQuestOres>;  
@@ -628,9 +621,7 @@ mixer.recipeBuilder()
 	.duration(20)
 	.EUt(16)
 	.buildAndRegister();
-
-var graphite_nugget = <gregtech:meta_item_1:9204>;
-alloy_smelter.findRecipe(16, [<minecraft:iron_nugget> *1, graphite_nugget *1], [null]).remove();		
+	
 alloy_smelter.findRecipe(8, [<minecraft:sand> * 2, <minecraft:clay_ball> * 1], [null]).remove();
 
 recipes.addShaped("it3_gt_resistor", <metaitem:component.resistor> *1, [
@@ -1077,7 +1068,7 @@ for entry in oreDict {
 }  
 
 //Remove easy Rocket Fuel recipe
-chemical_reactor.findRecipe(388, [<metaitem:circuit.integrated>.withTag({Configuration: 1})], [<liquid:oxygen>*500, <liquid:hydrogen>*3000, <liquid:nitrogen_dioxide>*1000]).remove();
+//chemical_reactor.findRecipe(388, [<metaitem:circuit.integrated>.withTag({Configuration: 1})], [<liquid:oxygen>*500, <liquid:hydrogen>*3000, <liquid:nitrogen_dioxide>*1000]).remove();	//Removed by Gregicality
 
 //change Sodium Bisulfate Dust recipe to fix chemical dyes
 var sodiumBisulfate = <gregtech:meta_item_1:2382>;
