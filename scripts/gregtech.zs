@@ -383,7 +383,15 @@ centrifuge.recipeBuilder().inputs(<ore:dustEndstone> *1)
   .chancedOutput(sand * 1 , 9000, 100)
   .duration(320).EUt(20).buildAndRegister();	
   
-  
+// Centrifuge: Remove Air -> Noble gases since it was an easy way to get Helium.  Let's remove Argon too while we're at it.
+centrifuge.findRecipe(5, null, [<liquid:liquid_air> * 53000]).remove();
+centrifuge.recipeBuilder()
+	.fluidInputs(<liquid:liquid_air> * 51000)
+	.fluidOutputs([<liquid:nitrogen> * 32000, <liquid:nitrogen> * 8000, <liquid:oxygen> * 11000])
+	.duration(1500)
+	.EUt(5)
+	.buildAndRegister();	
+
 // Add oredicts to facilitate some questing
 var oreIronQuestOres = <ore:ironQuestOres>;  
 var oreCopperQuestOres = <ore:copperQuestOres>;  
@@ -620,7 +628,9 @@ mixer.recipeBuilder()
 	.duration(20)
 	.EUt(16)
 	.buildAndRegister();
-	
+
+var graphite_nugget = <gregtech:meta_item_1:9204>;
+alloy_smelter.findRecipe(16, [<minecraft:iron_nugget> *1, graphite_nugget *1], [null]).remove();		
 alloy_smelter.findRecipe(8, [<minecraft:sand> * 2, <minecraft:clay_ball> * 1], [null]).remove();
 
 recipes.addShaped("it3_gt_resistor", <metaitem:component.resistor> *1, [

@@ -133,7 +133,7 @@ chemical_reactor.recipeBuilder()
 	.fluidInputs([<liquid:helium3> * 500])	
 	.outputs(<contenttweaker:helium_infused_dilithium_dust>)
 	.duration(12400).EUt(3072)
-	.buildAndRegister();	
+	.buildAndRegister();
 	
 // New Machine Structure recipes
 assembler.recipeBuilder()
@@ -312,10 +312,10 @@ recipes.addShaped("it3_advancedrocketry_coiltitanium", titanium_coil, [
   [<ore:wireGtQuadrupleTitanium>, <ore:wireGtQuadrupleTitanium>, <ore:wireGtQuadrupleTitanium>]]);  
   
 // Iridium Coil recipe requires an Assembler because a) its buffest, and b) We don't have wires to use as ingredients.
-recipes.removeByRecipeName("advancedrocketry:coilsteel");
+recipes.removeByRecipeName("advancedrocketry:coiliridium");
 assembler.recipeBuilder()
   .inputs(<ore:wireGtQuadrupleSteel> * 8)
-  .fluidInputs([<liquid:iridium> * 488])
+  .fluidInputs([<liquid:iridium> * 976])
   .outputs(iridium_coil * 1)
   .duration(140)
   .EUt(512)
@@ -598,14 +598,14 @@ recipes.addShaped("it3_advancedrocketry_motor", <libvulpes:motor>, [
 // Advanced Motor
 recipes.remove(<libvulpes:advancedmotor>);
 recipes.addShaped("it3_advancedrocketry_advancedmotor", <libvulpes:advancedmotor>, [
-	[null, <ore:stickLongTitanium>, null], 
+	[null, <ore:stickLongIridium>, null], 
 	[null, <metaitem:electric.motor.hv>, null], 
 	[null, <ore:craftingToolWrenchEmptyTag>, null]]);
 	
 // Enhanced Motor
 recipes.remove(<libvulpes:enhancedmotor>);
 recipes.addShaped("it3_advancedrocketry_enhancedmotor", <libvulpes:enhancedmotor>, [
-	[null, <ore:stickLongTungstenSteel>, null], 
+	[null, <ore:stickLongTritanium>, null], 
 	[null, <metaitem:electric.motor.ev>, null], 
 	[null, <ore:craftingToolWrenchEmptyTag>, null]]);
 	
@@ -760,16 +760,16 @@ recipes.remove(<advancedrocketry:observatory>);
 recipes.addShaped("it3_advancedrocketry_observatory", <advancedrocketry:observatory>, [
 	[<ore:paneGlass>, <advancedrocketry:misc>, <ore:paneGlass>], 
 	[<advancedrocketry:satelliteprimaryfunction>, <libvulpes:structuremachine>, <advancedrocketry:satelliteprimaryfunction>], 
-	[<ore:plateStainlessSteel>, <ore:plateStainlessSteel>, <ore:plateStainlessSteel>]]);
+	[<ore:plateStainlessSteel>, <ore:gemDilithium>, <ore:plateStainlessSteel>]]);
 
-// Warp Core
+// Warp Core (Allows travel to other planets)
 recipes.remove(<advancedrocketry:warpcore>);
 recipes.addShaped("it3_advancedrocketry_warpcore", <advancedrocketry:warpcore>, [
 	[<ore:plateTitanium>, <ore:circuitExtreme>, <ore:plateTitanium>], 
-	[<ore:plateTungstenSteel>, tungstensteel_coil, <ore:plateTungstenSteel>], 
-	[<ore:plateTitanium>, <ore:circuitExtreme>, <ore:plateTitanium>]]);
+	[<ore:coilIridium>, tungstensteel_coil, <ore:coilIridium>], 
+	[<ore:coilIridium>, <ore:coilIridium>, <ore:coilIridium>]]);
 
-// Warp Controller
+// Warp Controller (Allows travel to other systems)
 recipes.remove(<advancedrocketry:warpmonitor>);
 recipes.addShaped("it3_advancedrocketry_warpmonitor", <advancedrocketry:warpmonitor>, [
 	[<ore:plateTungstenSteel>, <advancedrocketry:misc>, <ore:plateTungstenSteel>], 
