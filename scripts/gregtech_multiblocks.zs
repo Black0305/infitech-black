@@ -32,7 +32,7 @@ val inBiome as IBlockMatcher = function (state as IBlockWorldState) as bool {
 };
 
 
-var id = 2049; // More or less arbitrary id # to start with
+var id = 2500; // More or less arbitrary id # to start with
 var unlocalized_name = "low_gravity_reactor";
 /* STRUCTURE: In a RIGHT, BACK, UP pattern, the first aisle represents the bottom slice of the multiblock, with the bottom row representing the "front" */			
 val low_gravity_reactor = Builder.start(unlocalized_name, id)
