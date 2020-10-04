@@ -10,6 +10,7 @@ val chemical_bath as RecipeMap = RecipeMap.getByName("chemical_bath");
 val compressor as RecipeMap = RecipeMap.getByName("compressor");
 val fluid_canner as RecipeMap = RecipeMap.getByName("fluid_canner") as RecipeMap;
 val vacuum_freezer as RecipeMap = RecipeMap.getByName("vacuum_freezer");
+val centrifuge as RecipeMap = RecipeMap.getByName("centrifuge");
 
 val packer as RecipeMap = RecipeMap.getByName("packer");
 
@@ -57,6 +58,8 @@ var blockLead = <nuclearcraft:ingot_block:2>;
 var blockThorium = <nuclearcraft:ingot_block:3>;
 var blockLithium = <nuclearcraft:ingot_block:6>;
 var blockMagnesium = <nuclearcraft:ingot_block:7>;
+var crushed_fluorite = <nuclearcraft:gem_dust:5>;
+var helium_cooler = <nuclearcraft:cooler:8>;
 
 recipes.remove(blockUranium);
 recipes.remove(blockBoron);
@@ -189,10 +192,16 @@ recipes.addShaped("infitech3_tile.nuclearcraft.bin", <nuclearcraft:bin>, [
   [<ore:cableGtSingleCopper>, <ore:blockObsidian>, itemDuct], 
   [<ore:plateSteel>, <ore:pipeSmallSteel>, <ore:plateSteel>]]);
   
+var fuelLEU233 = <nuclearcraft:fuel_uranium>;
+var fuelHEU233 = <nuclearcraft:fuel_uranium:2>;
 var fuelLEU235 = <nuclearcraft:fuel_uranium:4>;
 var fuelHEU235 = <nuclearcraft:fuel_uranium:6>;
+var uranium238Ingot = <gregtech:meta_item_1:10075>;
+var uranium238Dust = <gregtech:meta_item_1:2075>;
 recipes.addShapeless("it3_nc_leu235", fuelLEU235, [<ore:dustUranium235>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>]);
 recipes.addShapeless("it3_nc_heu235", fuelHEU235, [<ore:dustUranium235>, <ore:dustUranium235>, <ore:dustUranium235>, <ore:dustUranium235>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>, <ore:dustUranium>]);
+recipes.addShapeless("it3_nc_leu233", fuelLEU233, [<nuclearcraft:uranium>,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust]);
+recipes.addShapeless("it3_nc_heu233", fuelHEU233, [<nuclearcraft:uranium>,<nuclearcraft:uranium>,<nuclearcraft:uranium>,<nuclearcraft:uranium>,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust,uranium238Dust]);
 
 // Allow GT Borax Dust to count as Boron oredict
 var ingotBoron = <nuclearcraft:ingot:5>;
@@ -304,7 +313,7 @@ chemical_bath.recipeBuilder()
 	.inputs(<ore:dustThoriumHydroxide> * 1)
 	.fluidInputs(<liquid:hydrochloric_acid> * 100)
 	.outputs([<ore:dustCrudeThoriumPrecipitate>.firstItem * 1, <ore:nuggetThorium232>.firstItem * 2])
-  .chancedOutput(<ore:nuggetThorium232>.firstItem * 1, 900, 400)  
+	.chancedOutput(<ore:nuggetThorium232>.firstItem * 1, 900, 400)  
 	.duration(50)
 	.EUt(220)
 	.buildAndRegister();  
@@ -313,7 +322,7 @@ chemical_bath.recipeBuilder()
 	.inputs(<ore:dustCrudeThoriumPrecipitate> * 1)
 	.fluidInputs(<liquid:nitric_acid> * 100)
 	.outputs([<ore:dustThoriumDioxide>.firstItem * 1, <ore:nuggetThorium232>.firstItem * 3])
-  .chancedOutput(<ore:nuggetThorium232>.firstItem * 1, 1200, 400)  
+	.chancedOutput(<ore:nuggetThorium232>.firstItem * 1, 1200, 400)  
 	.duration(50)
 	.EUt(510)
 	.buildAndRegister();    
@@ -322,7 +331,7 @@ chemical_reactor.recipeBuilder()
 	.inputs(<ore:dustThoriumDioxide> * 1)
 	.fluidInputs(<liquid:hydrogen> * 2000)
 	.outputs([<ore:ingotThorium232>.firstItem * 1])
-  .fluidOutputs(<liquid:oxygen> * 1000, <liquid:water> * 3000)  
+	.fluidOutputs(<liquid:oxygen> * 1000, <liquid:water> * 3000)  
 	.duration(25)
 	.EUt(1040)
 	.buildAndRegister();   
@@ -439,10 +448,9 @@ packer.recipeBuilder().notConsumable(<metaitem:circuit.integrated>.withTag({Conf
 packer.recipeBuilder().notConsumable(<metaitem:circuit.integrated>.withTag({Configuration: 1})).inputs(<ore:nuggetCalifornium252Oxide> * 9).outputs(<ore:ingotCalifornium252Oxide>.firstItem).duration(10).EUt(12).buildAndRegister();
 
 
-// Helium Cooler
-var helium_cooler = <nuclearcraft:cooler:8>;
+// 	 Cooler
 fluid_canner.recipeBuilder() 
-    .fluidInputs(<liquid:helium> * 1000)
+    .fluidInputs(<liquid:liquidhelium> * 100)
     .inputs(<nuclearcraft:cooler>)
     .outputs(helium_cooler * 1 )
     .duration(50)
@@ -538,17 +546,21 @@ assembler.recipeBuilder()
   .buildAndRegister();  
   
 var basic_reactor_plate = <nuclearcraft:part>;
+var advanced_reactor_plate = <nuclearcraft:part:1>;
+
+// New recipe for advanced plate: Get basic plate super hot and infuse
+recipes.removeByRecipeName("nuclearcraft:item.nuclearcraft.part.plate_advanced");    
 
 vacuum_freezer.recipeBuilder()
 	.inputs(<contenttweaker:basic_reactor_plate_hot> * 1)
-	.fluidInputs(<liquid:liquidhelium> * 100)
-	.outputs(basic_reactor_plate * 1)
-	.duration(60)
-	.EUt(260)
+	.fluidInputs(<liquid:liquidhelium> * 50)
+	.outputs(advanced_reactor_plate * 1)
+	.duration(960)
+	.EUt(1024)
 	.buildAndRegister();
 
 blast_furnace.recipeBuilder()
-	.inputs([<ore:plateSteel> * 1, <ore:ingotCarbon> * 1])
+	.inputs([basic_reactor_plate * 1, <ore:dustCarbon> * 50])
 	.outputs(<contenttweaker:basic_reactor_plate_hot>)
 	.property("temperature", 3200)
 	.duration(120)
@@ -667,7 +679,26 @@ chemical_reactor.recipeBuilder().fluidInputs([<liquid:fuel_hecf_249> * 144,  <li
 chemical_reactor.recipeBuilder().fluidInputs([<liquid:fuel_lecf_251> * 144,  <liquid:fluorine> * 1000]).fluidOutputs([<liquid:fuel_lecf_251_fluoride> * 144]).duration(20).EUt(45).buildAndRegister();
 chemical_reactor.recipeBuilder().fluidInputs([<liquid:fuel_hecf_251> * 144,  <liquid:fluorine> * 1000]).fluidOutputs([<liquid:fuel_hecf_251_fluoride> * 144]).duration(20).EUt(45).buildAndRegister();
 
+// Remove's NC's own Sulfuric Acid + Fluorite Water recipe (its too cheap
+chemical_reactor.findRecipe(15, null, [<liquid:fluorite_water> * 666, <liquid:sulfuric_acid> * 1000]).remove();
+
+// Remove's NC's own Fluorite Water -> Crushed Fluorite recipe (it creates a conflict)
+chemical_reactor.findRecipe(30, null, [<liquid:fluorite_water> * 666]).remove();
+
 // Add NC and GT recipe for calcium sulfate solution 
 mods.nuclearcraft.chemical_reactor.addRecipe([<liquid:fluorite_water> * 666, <liquid:sulfuric_acid> * 1000, <liquid:hydrofluoric_acid> * 2000, <liquid:calcium_sulfate_solution> * 666, 4.5, 4.0]);
 chemical_reactor.recipeBuilder().fluidInputs([<liquid:fluorite_water> * 666, <liquid:sulfuric_acid> * 1000]).fluidOutputs([<liquid:hydrofluoric_acid> * 2000, <liquid:calcium_sulfate_solution> * 666]).duration(20).EUt(130).buildAndRegister();
 
+// Add back crushed fluorite recipe with Centrifuge instead so it has a GT presence and doesn't conflict
+centrifuge.recipeBuilder().fluidInputs([<liquid:fluorite_water> * 666]).outputs([crushed_fluorite]).duration(240).EUt(130).buildAndRegister();
+
+// Remove weird sugar -> ethanol recipe.  It doesn't really cause balance issues but it looks weird.
+chemical_reactor.findRecipe(15, null, [<liquid:water> * 1000, <liquid:sugar> * 144]).remove();
+
+// Replace the Ethanol + Glowing Shrooms -> Radaway recipe to use non-NC Ethanol
+chemical_reactor.findRecipe(10, [<nuclearcraft:glowing_mushroom> * 3], [<liquid:ethanol> * 1000]).remove();
+chemical_reactor.recipeBuilder().fluidInputs([<liquid:bio.ethanol> * 250]).inputs([<nuclearcraft:glowing_mushroom> * 3]).fluidOutputs([<liquid:radaway> * 250]).duration(400).EUt(45).buildAndRegister();
+
+// Replace the NC Helium Cooler recipe with a "cheaper" one since Liquid Helium is a lot more valuable now.
+mods.nuclearcraft.infuser.removeRecipeWithOutput(helium_cooler);
+mods.nuclearcraft.infuser.addRecipe([<nuclearcraft:cooler>, <liquid:liquidhelium> * 100, helium_cooler, 3.0, 8.5]);
